@@ -2,6 +2,7 @@
 
 const test = require('tap').test;
 const sandbox = require('@log4js-node/sandboxed-module');
+const appender = require('../../lib');
 
 function setupLogging(category, options, errorOnSend) {
   const msgs = [];
@@ -52,12 +53,10 @@ function setupLogging(category, options, errorOnSend) {
     }
   });
 
-  const appender = appenderModule.configure({
-    smtp: options
-  }, fakeLayouts);
+  const app = appenderModule.configure(options, fakeLayouts);
 
   return {
-    appender: appender,
+    appender: app,
     mailer: fakeMailer,
     layouts: fakeLayouts,
     console: fakeConsole,
@@ -70,7 +69,7 @@ function checkMessages(assert, result, sender, subject) {
     assert.equal(msg.from, sender);
     assert.equal(msg.to, 'recipient@domain.com');
     assert.equal(msg.subject, subject || `Log event #${i + 1}`);
-    assert.ok(new RegExp(`.+Log event #${i + 1}\n$`).test(msg.text));
+    assert.ok(new RegExp(`.*Log event #${i + 1}\n$`).test(msg.text));
   });
 }
 
@@ -79,6 +78,11 @@ function logEvent(message) {
 }
 
 test('log4js smtpAppender', (batch) => {
+  batch.test('module should export configure function', (t) => {
+    t.type(appender.configure, 'function');
+    t.end();
+  });
+
   batch.test('minimal config', (t) => {
     const setup = setupLogging('minimal config', {
       recipients: 'recipient@domain.com',
@@ -176,12 +180,12 @@ test('log4js smtpAppender', (batch) => {
       t.equal(setup.results[0].to, 'recipient@domain.com');
       t.equal(setup.results[0].subject, 'Log event #1');
       t.equal(
-        setup.results[0].text.match(new RegExp('.+Log event #[1-2]$', 'gm')).length,
+        setup.results[0].text.match(new RegExp('.*Log event #[1-2]$', 'gm')).length,
         2
       );
       t.equal(setup.results[1].to, 'recipient@domain.com');
       t.equal(setup.results[1].subject, 'Log event #3');
-      t.ok(/.+Log event #3\n$/.test(setup.results[1].text));
+      t.ok(/.*Log event #3\n$/.test(setup.results[1].text));
       t.end();
     }, 3000);
   });
@@ -269,7 +273,7 @@ test('log4js smtpAppender', (batch) => {
       assert.equal(setup.results[0].text, 'See logs as attachment');
       assert.equal(attachment.filename, 'default.log');
       assert.equal(attachment.contentType, 'text/x-log');
-      assert.ok(new RegExp(`.+Log event #${1}\n$`).test(attachment.content));
+      assert.ok(new RegExp(`.*Log event #${1}\n$`).test(attachment.content));
       assert.end();
     });
     t.end();
