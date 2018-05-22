@@ -279,5 +279,22 @@ test('log4js smtpAppender', (batch) => {
     t.end();
   });
 
+  batch.test('should support html emails', (t) => {
+    const setup = setupLogging('html config', {
+      recipients: 'recipient@domain.com',
+      html: true
+    });
+    setup.appender(logEvent('Log event #1'));
+    t.test('message should contain proper data', (assert) => {
+      assert.equal(setup.results.length, 1);
+      assert.match(setup.results[0].html, /Log event #1\n$/);
+      assert.end();
+    });
+    t.end();
+  });
+
+  batch.test('should support html emails with attachments');
+  batch.test('should wait to send remaining emails on shutdown');
+
   batch.end();
 });
