@@ -4,7 +4,7 @@ const test = require('tap').test;
 const sandbox = require('@log4js-node/sandboxed-module');
 const appender = require('../../lib');
 
-function setupLogging(category, options, errorOnSend) {
+function setupLogging(category, options, errorOnSend, dontSendMail) {
   const msgs = [];
 
   const fakeMailer = {
@@ -16,8 +16,10 @@ function setupLogging(category, options, errorOnSend) {
             callback({ message: errorOnSend });
             return;
           }
-          msgs.push(msg);
-          callback(null, true);
+          if (!dontSendMail) {
+            msgs.push(msg);
+            callback(null, true);
+          }
         },
         close: function () {
         }
@@ -293,8 +295,99 @@ test('log4js smtpAppender', (batch) => {
     t.end();
   });
 
-  batch.test('should support html emails with attachments');
-  batch.test('should wait to send remaining emails on shutdown');
+  batch.test('should support html emails with attachments', (t) => {
+    const setup = setupLogging('html attachment config', {
+      recipients: 'recipient@domain.com',
+      html: true,
+      attachment: {
+        enable: true
+      },
+      SMTP: {
+        port: 25,
+        auth: {
+          user: 'user@domain.com'
+        }
+      }
+    });
+    setup.appender(logEvent('Log event #1'));
 
+    t.test('message should contain proper data', (assert) => {
+      assert.equal(setup.results.length, 1);
+      assert.equal(setup.results[0].attachments.length, 1);
+      const attachment = setup.results[0].attachments[0];
+      assert.equal(setup.results[0].html, 'See logs as attachment');
+      assert.equal(attachment.filename, 'default.log');
+      assert.equal(attachment.contentType, 'text/x-log');
+      assert.ok(new RegExp(`.*Log event #${1}\n$`).test(attachment.content));
+      assert.end();
+    });
+    t.end();
+  });
+
+  batch.test('should wait to send remaining emails on shutdown', (t) => {
+    const setup = setupLogging('shutdown timeout', {
+      recipients: 'recipient@domain.com',
+      sendInterval: 30,
+      shutdownTimeout: 1,
+      SMTP: {
+        port: 25,
+        auth: {
+          user: 'user@domain.com'
+        }
+      }
+    });
+    setup.appender(logEvent('Log event #1'));
+    t.equal(setup.results.length, 0, 'should not be any messages yet');
+
+    setup.appender.shutdown(() => {
+      t.test('message should contain proper data', (assert) => {
+        assert.equal(setup.results.length, 1);
+        assert.match(setup.results[0].text, /Log event #1\n$/);
+        assert.end();
+      });
+      t.end();
+    });
+  });
+
+  batch.test('should only wait a specified time for sending remaining emails', (t) => {
+    const setup = setupLogging('shutdown timeout without sending mails', {
+      recipients: 'recipient@domain.com',
+      sendInterval: 30,
+      shutdownTimeout: 1,
+      SMTP: {
+        port: 25,
+        auth: {
+          user: 'user@domain.com'
+        }
+      }
+    }, false, true);
+    setup.appender(logEvent('Log event #1'));
+    t.equal(setup.results.length, 0, 'should not be any messages yet');
+
+    setup.appender.shutdown(() => {
+      t.equal(setup.results.length, 0);
+      t.end();
+    });
+  });
+
+  batch.test('should not break if shutdown called when no messages to send', (t) => {
+    const setup = setupLogging('shutdown with no mail to send', {
+      recipients: 'recipient@domain.com',
+      sendInterval: 30,
+      shutdownTimeout: 1,
+      SMTP: {
+        port: 25,
+        auth: {
+          user: 'user@domain.com'
+        }
+      }
+    });
+    t.equal(setup.results.length, 0, 'should not be any messages yet');
+
+    setup.appender.shutdown(() => {
+      t.equal(setup.results.length, 0);
+      t.end();
+    });
+  });
   batch.end();
 });
