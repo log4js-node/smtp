@@ -1,6 +1,6 @@
 {
   "name": "@log4js-node/smtp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "SMTP Appender for log4js-node",
   "homepage": "https://log4js-node.github.io/log4js-node/",
   "files": [
