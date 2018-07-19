@@ -17,7 +17,7 @@ npm install @log4js-node/smtp
   * `auth` - `object` (optional) - authentication details
     * `user` - `string`
     * `pass` - `string`
-* `transport` - `object` (optional, if not present will use `SMTP`) - see nodemailer docs for transport options
+* `transport` - `object` (optional, if not present will use `SMTP`) - see [`nodemailer`](https://nodemailer.com/smtp/) docs for transport options
   * `plugin` - `string` (optional, defaults to `smtp`) - the nodemailer transport plugin to use
   * `options` - `object` - configuration for the transport plugin
 * `attachment` - `object` (optional) - send logs as email attachment
@@ -72,7 +72,7 @@ This configuration will send an email once every hour, with all the log events o
 log4js.configure({
   appenders: {
     email: {
-      type: '@log4js-node/smtp', smtp: { host: 'smtp.company.name', port: 8025 }, recipients: 'dev.team@company.name'
+      type: '@log4js-node/smtp', SMTP: { host: 'smtp.company.name', port: 8025 }, recipients: 'dev.team@company.name'
     }
   },
   categories: { default: { appenders: ['email'], level: 'info' } }
@@ -99,4 +99,4 @@ log4js.configure({
   }
 });
 ```
-A similar config can be used to specify a different transport plugin than `smtp`. See the nodemailer docs for more details.
+A similar config can be used to specify a different transport plugin than `smtp`. See the [`nodemailer`](https://nodemailer.com/smtp/) docs for more details.
