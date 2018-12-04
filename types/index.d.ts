@@ -44,6 +44,10 @@ export interface SmtpAppender {
 	html?: boolean;
 	// (defaults to basicLayout)
 	layout?: Layout;
+	// email addresses to send the carbon-copy logs to
+	cc?: string;
+	// email addresses to send the blind-carbon-copy logs to
+	bcc?: string;
 }
 
 export type Appender = Appender | SmtpAppender;
