@@ -253,6 +253,21 @@ test('log4js smtpAppender', (batch) => {
     t.end();
   });
 
+  batch.test('cc/bcc config', (t) => {
+    const setup = setupLogging('cc config', {
+      recipients: 'recipient@domain.com',
+      cc: 'cc.recipient@domain.com',
+      bcc: 'bcc.recipient@domain.com',
+    });
+    setup.appender(logEvent('Log event #1'));
+
+    t.equal(setup.results.length, 1, 'should be one message only');
+    t.equal(setup.results[0].cc, 'cc.recipient@domain.com');
+    t.equal(setup.results[0].bcc, 'bcc.recipient@domain.com');
+    checkMessages(t, setup);
+    t.end();
+  });
+
   batch.test('attachment config', (t) => {
     const setup = setupLogging('attachment config', {
       recipients: 'recipient@domain.com',
