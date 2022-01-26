@@ -30,7 +30,7 @@ npm install @log4js-node/smtp
 * `subject` - `string` (optional, defaults to message from first log event in batch) - subject for email
 * `sender` - `string` (optional) - who the logs should be sent as
 * `html` - `boolean` (optional, defaults to `false`) - send the email as HTML instead of plain text
-* `layout` - `object` (optional, defaults to basicLayout) - see [layouts](layouts.md)
+* `layout` - `object` (optional, defaults to basicLayout) - see [layouts](https://log4js-node.github.io/log4js-node/layouts.html)
 * `cc` - `string` (optional) - email addresses to send the carbon-copy logs to
 * `bcc` - `string` (optional) - email addresses to send the blind-carbon-copy logs to
 
