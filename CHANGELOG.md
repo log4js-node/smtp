@@ -3,6 +3,7 @@
 ## 2.0.1
 
 - [bug: Fixed smtp appender exiting NodeJS on error](https://github.com/log4js-node/smtp/pull/20) - thanks [@peteriman](https://github.com/peteriman)
+- [type: updated typings](https://github.com/log4js-node/smtp/pull/25) - thanks [@peteriman](https://github.com/peteriman)
 - [chore(dep): Updated dependencies](https://github.com/log4js-node/smtp/pull/21) - thanks [@peteriman](https://github.com/peteriman)
   - debug from 3.1.0 to 4.3.3
   - nodemailer from 6.6.1 to 6.7.2
