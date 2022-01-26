@@ -4,7 +4,7 @@ const test = require('tap').test;
 const sandbox = require('@log4js-node/sandboxed-module');
 const appender = require('../../lib');
 
-function setupLogging(category, options, errorOnSend, dontSendMail) {
+function setupLogging(category, options, errorOnSend, dontSendMail, errorOnConnect) {
   const msgs = [];
 
   const fakeMailer = {
@@ -19,6 +19,11 @@ function setupLogging(category, options, errorOnSend, dontSendMail) {
           if (!dontSendMail) {
             msgs.push(msg);
             callback(null, true);
+          }
+        },
+        on: function (type, callback) {
+          if (type === 'error' && errorOnConnect) {
+            callback({ message: errorOnConnect });
           }
         },
         close: function () {
@@ -82,6 +87,24 @@ function logEvent(message) {
 test('log4js smtpAppender', (batch) => {
   batch.test('module should export configure function', (t) => {
     t.type(appender.configure, 'function');
+    t.end();
+  });
+
+  batch.test('on error', (t) => {
+    const setup = setupLogging('on error', {
+      recipients: 'recipient@domain.com',
+      sendInterval: 0,
+      SMTP: { port: 25, auth: { user: 'user@domain.com' } }
+    }, false, true, 'on error');
+
+    setup.appender(logEvent('This will break'));
+
+    t.test('should be logged to console', (assert) => {
+      assert.equal(setup.console.errors.length, 1);
+      assert.equal(setup.console.errors[0].msg, 'log4js.smtpAppender - Error happened');
+      assert.equal(setup.console.errors[0].value.message, 'on error');
+      assert.end();
+    });
     t.end();
   });
 
@@ -203,7 +226,7 @@ test('log4js smtpAppender', (batch) => {
 
     t.test('should be logged to console', (assert) => {
       assert.equal(setup.console.errors.length, 1);
-      assert.equal(setup.console.errors[0].msg, 'log4js.smtpAppender - Error happened');
+      assert.equal(setup.console.errors[0].msg, 'log4js.smtpAppender - Send mail error happened');
       assert.equal(setup.console.errors[0].value.message, 'oh noes');
       assert.end();
     });
