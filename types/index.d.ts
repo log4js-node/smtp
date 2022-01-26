@@ -1,5 +1,64 @@
 // Type definitions for log4js SMTP appender
 
+export interface BaseLayout {
+  type: 'basic';
+}
+
+export interface ColoredLayout {
+  type: 'colored' | 'coloured';
+}
+
+export interface MessagePassThroughLayout {
+  type: 'messagePassThrough';
+}
+
+export interface DummyLayout {
+  type: 'dummy';
+}
+
+
+export interface Level {
+  isEqualTo(other: string): boolean;
+  isEqualTo(otherLevel: Level): boolean;
+  isLessThanOrEqualTo(other: string): boolean;
+  isLessThanOrEqualTo(otherLevel: Level): boolean;
+  isGreaterThanOrEqualTo(other: string): boolean;
+  isGreaterThanOrEqualTo(otherLevel: Level): boolean;
+  colour: string;
+  level: number;
+  levelStr: string;
+}
+
+export interface LoggingEvent {
+  categoryName: string;  // name of category
+  level: Level;  // level of message
+  data: any[];  // objects to log
+  startTime: Date;
+  pid: number;
+  context: any;
+  cluster?: {
+    workerId: number;
+    worker: number;
+  };
+}
+
+export type Token = ((logEvent: LoggingEvent) => string) | string;
+
+export interface PatternLayout {
+  type: 'pattern';
+  // specifier for the output format, using placeholders as described below
+  pattern: string;
+  // user-defined tokens to be used in the pattern
+  tokens?: { [name: string]: Token };
+}
+
+export interface CustomLayout {
+  [key: string]: any;
+  type: string;
+}
+
+export type Layout = BaseLayout | ColoredLayout | MessagePassThroughLayout | DummyLayout | PatternLayout | CustomLayout;
+
 export interface SmtpAppender {
 	type: '@log4js-node/smtp';
 	// (if not present will use transport field)
@@ -50,4 +109,4 @@ export interface SmtpAppender {
 	bcc?: string;
 }
 
-export type Appender = Appender | SmtpAppender;
+export type Appender = SmtpAppender;
