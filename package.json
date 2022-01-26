@@ -40,20 +40,20 @@
     "lib": "lib"
   },
   "dependencies": {
-    "debug": "^3.1.0",
-    "nodemailer": "^6.6.1"
+    "debug": "^4.3.3",
+    "nodemailer": "^6.7.2"
   },
   "devDependencies": {
-    "@log4js-node/sandboxed-module": "^2.1.1",
+    "@log4js-node/sandboxed-module": "^2.2.1",
     "codecov": "^3.0.0",
-    "conventional-changelog": "^1.1.15",
-    "eslint": "^4.10.0",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "conventional-changelog": "^3.1.25",
+    "eslint": "^8.7.0",
+    "eslint-config-airbnb-base": "^13.2.0",
     "eslint-import-resolver-node": "^0.3.1",
     "eslint-plugin-import": "^2.8.0",
-    "husky": "^0.14.3",
-    "nyc": "^11.5.0",
-    "tap": "^12.0.1",
+    "husky": "^7.0.4",
+    "nyc": "^15.1.0",
+    "tap": "^15.1.6",
     "validate-commit-msg": "^2.14.0"
   },
   "browser": {
