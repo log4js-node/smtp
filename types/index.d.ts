@@ -16,7 +16,6 @@ export interface DummyLayout {
   type: 'dummy';
 }
 
-
 export interface Level {
   isEqualTo(other: string): boolean;
   isEqualTo(otherLevel: Level): boolean;
