@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@log4js-node/sandboxed-module": "^2.2.1",
-    "codecov": "^3.0.0",
+    "codecov": "^3.8.3",
     "conventional-changelog": "^3.1.25",
     "eslint": "^8.7.0",
     "eslint-config-airbnb-base": "^13.2.0",
