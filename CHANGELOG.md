@@ -2,7 +2,7 @@
 
 ## 2.0.2
 
-- [chore(deps): updated dev-dep (eslint and typescript)](https://github.com/log4js-node/smtp/pull/29) - thanks [@peteriman](https://github.com/peteriman)
+- [chore(deps): updated deps-dev (eslint and typescript)](https://github.com/log4js-node/smtp/pull/29) - thanks [@peteriman](https://github.com/peteriman)
   - eslint from 8.8.0 to 8.10.0
   - typescript from 4.5.5 to 4.6.2 
 - [chore(deps): updated deps-dev](https://github.com/log4js-node/smtp/pull/28) - thanks [@peteriman](https://github.com/peteriman)
