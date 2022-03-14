@@ -32,7 +32,7 @@ function setupLogging(category, options, errorOnSend, dontSendMail, errorOnConne
     }
   };
 
-  const layout = e => e.data[0];
+  const layout = (e) => e.data[0];
 
   const fakeLayouts = {
     layout: function (type, config) {
@@ -205,7 +205,7 @@ test('log4js smtpAppender', (batch) => {
       t.equal(setup.results[0].to, 'recipient@domain.com');
       t.equal(setup.results[0].subject, 'Log event #1');
       t.equal(
-        setup.results[0].text.match(new RegExp('.*Log event #[1-2]$', 'gm')).length,
+        setup.results[0].text.match(/.*Log event #[1-2]$/gm).length,
         2
       );
       t.equal(setup.results[1].to, 'recipient@domain.com');
