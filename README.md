@@ -1,5 +1,7 @@
-# SMTP Appender for log4js
-[![Build Status](https://travis-ci.com/log4js-node/smtp.svg?branch=master)](https://travis-ci.com/log4js-node/smtp)
+SMTP Appender for log4js [![CodeQL](https://github.com/log4js-node/smtp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/log4js-node/smtp/actions/workflows/codeql-analysis.yml) [![Node.js CI](https://github.com/log4js-node/smtp/actions/workflows/node.js.yml/badge.svg)](https://github.com/log4js-node/smtp/actions/workflows/node.js.yml)
+===========
+
+[![NPM](https://nodei.co/npm/@log4js-node/smtp.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@log4js-node/smtp/)
 
 Sends log events as emails. If you use this appender, you should also call `log4js.shutdown` when your application closes so that any remaining emails can be sent. Many of the configuration options below are passed through to nodemailer, so you should read their docs to get the most out of this appender.
 
