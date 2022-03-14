@@ -1,5 +1,14 @@
 # smtp Changelog
 
+## 2.0.3
+
+- [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/31) - thanks [@peteriman](https://github.com/peteriman)
+  - eslint from 8.10.0 to 8.11.0
+  - tap from 15.1.6 to 16.0.0
+  - package-lock.json
+  - eslint-config-airbnb-base from 13.2.0 to 15.0.0
+- [chore(docs): updated README.md with badges](https://github.com/log4js-node/smtp/pull/32) thanks [@peteriman](https://github.com/peteriman)
+
 ## 2.0.2
 
 - [chore(deps): updated deps-dev (eslint and typescript)](https://github.com/log4js-node/smtp/pull/29) - thanks [@peteriman](https://github.com/peteriman)
