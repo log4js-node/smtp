@@ -54,7 +54,7 @@
     "eslint-plugin-import": "^2.25.4",
     "husky": "^7.0.4",
     "nyc": "^15.1.0",
-    "tap": "^15.1.6",
+    "tap": "^16.0.0",
     "typescript": "^4.6.2",
     "validate-commit-msg": "^2.14.0"
   },
