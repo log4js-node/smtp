@@ -41,7 +41,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "debug": "^4.3.3",
+    "debug": "^4.3.4",
     "nodemailer": "^6.7.2"
   },
   "devDependencies": {
