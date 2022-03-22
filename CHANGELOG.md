@@ -3,8 +3,8 @@
 ## 2.0.4
 
 - [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/34) - thanks [@peteriman](https://github.com/peteriman)
-  - nodemailer from 6.7.2 to 6.7.3
-  - debug from 4.3.3 to 4.3.4
+  - chore(dep): nodemailer from 6.7.2 to 6.7.3
+  - chore(dep): debug from 4.3.3 to 4.3.4
   - package-lock.json
 
 ## 2.0.3
