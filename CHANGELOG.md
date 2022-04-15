@@ -1,5 +1,17 @@
 # smtp Changelog
 
+## 2.0.5
+
+- [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/38) - thanks [@peteriman](https://github.com/peteriman)
+  - updated package-lock.json
+- [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/37) - thanks [@peteriman](https://github.com/peteriman)
+  - chore(dev): bump eslint from 8.11.0 to 8.13.0
+  - chore(dev): bump eslint-plugin-import from 2.25.4 to 2.26.0
+  - chore(dev): bump tap from 16.0.0 to 16.0.1
+  - chore(dev): bump typescript from 4.6.2 to 4.6.3
+  - updated package-lock.json
+- [chore(deps): bump minimist from 1.2.5 to 1.2.6](https://github.com/log4js-node/smtp/pull/36) - thanks [@Dependabot](https://github.com/dependabot)
+
 ## 2.0.4
 
 - [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/34) - thanks [@peteriman](https://github.com/peteriman)
