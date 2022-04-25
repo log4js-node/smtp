@@ -1,5 +1,9 @@
 # smtp Changelog
 
+## 2.0.7
+
+- is exactly the same as 2.0.7 and is a re-published 2.0.7 to npm
+
 ## 2.0.6
 
 - [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/41) - thanks [@peteriman](https://github.com/peteriman)
