@@ -1,5 +1,13 @@
 # smtp Changelog
 
+## 2.0.6
+
+- [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/41) - thanks [@peteriman](https://github.com/peteriman)
+  - chore(dev): bump eslint from 8.13.0 to 8.14.0
+  - updated package-lock.json
+- [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/40) - thanks [@peteriman](https://github.com/peteriman)
+  - package-lock.json
+
 ## 2.0.5
 
 - [chore(dep): updated dependencies](https://github.com/log4js-node/smtp/pull/38) - thanks [@peteriman](https://github.com/peteriman)
