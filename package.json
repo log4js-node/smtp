@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "nodemailer": "^6.7.3"
+    "nodemailer": "^6.7.5"
   },
   "devDependencies": {
     "@log4js-node/sandboxed-module": "^2.2.1",
